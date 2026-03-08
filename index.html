@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Yokesh Elumalai — Lead Android Engineer</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --teal: #1A7A6E;
+      --teal-light: #e8f5f3;
+      --teal-mid: #c2e4df;
+      --dark: #141414;
+      --mid: #444;
+      --soft: #777;
+      --border: #e8e8e8;
+      --bg: #fafafa;
+      --white: #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(250,250,250,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 5vw;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.2rem;
+      color: var(--teal);
+      text-decoration: none;
+      letter-spacing: 0.01em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--mid);
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--teal); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 100px 5vw 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px; right: -200px;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(26,122,110,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -100px; left: -100px;
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(26,122,110,0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: 780px;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--teal-light);
+      color: var(--teal);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.1s forwards;
+    }
+
+    .hero-tag::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--teal);
+    }
+
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      line-height: 1.05;
+      color: var(--dark);
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.2s forwards;
+    }
+
+    .hero h1 span { color: var(--teal); font-style: italic; }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--soft);
+      max-width: 560px;
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+      font-weight: 300;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.35s forwards;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.7s 0.5s forwards;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--teal);
+      color: white;
+      padding: 14px 28px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-primary:hover { background: #156459; transform: translateY(-1px); }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: transparent;
+      color: var(--dark);
+      padding: 14px 28px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      border: 1.5px solid var(--border);
+      transition: border-color 0.2s, color 0.2s, transform 0.15s;
+    }
+
+    .btn-outline:hover { border-color: var(--teal); color: var(--teal); transform: translateY(-1px); }
+
+    .hero-stats {
+      display: flex;
+      gap: 3rem;
+      margin-top: 4rem;
+      padding-top: 3rem;
+      border-top: 1px solid var(--border);
+      opacity: 0;
+      animation: fadeUp 0.7s 0.65s forwards;
+    }
+
+    .stat-num {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2.4rem;
+      color: var(--teal);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.8rem;
+      color: var(--soft);
+      font-weight: 500;
+      margin-top: 4px;
+      letter-spacing: 0.02em;
+    }
+
+    /* ── SECTION BASE ── */
+    section {
+      padding: 100px 5vw;
+    }
+
+    .section-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 1rem;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      max-width: 40px;
+      height: 1px;
+      background: var(--teal-mid);
+    }
+
+    .section-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      color: var(--dark);
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+      line-height: 1.15;
+    }
+
+    .section-title span { color: var(--teal); font-style: italic; }
+
+    /* ── ABOUT ── */
+    #about { background: var(--white); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+      margin-top: 3rem;
+    }
+
+    .about-text p {
+      font-size: 1rem;
+      color: var(--mid);
+      line-height: 1.8;
+      margin-bottom: 1.2rem;
+      font-weight: 300;
+    }
+
+    .about-text p strong { color: var(--dark); font-weight: 600; }
+
+    .about-highlights {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .highlight-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--teal);
+      padding: 1.2rem 1.4rem;
+      border-radius: 0 8px 8px 0;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .highlight-card:hover { transform: translateX(4px); }
+
+    .highlight-card h4 {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--teal);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+
+    .highlight-card p {
+      font-size: 0.9rem;
+      color: var(--mid);
+      font-weight: 300;
+    }
+
+    /* ── EXPERIENCE ── */
+    #experience { background: var(--bg); }
+
+    .timeline {
+      margin-top: 3rem;
+      position: relative;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 8px; bottom: 8px;
+      width: 1px;
+      background: var(--border);
+    }
+
+    .timeline-item {
+      padding-left: 2.5rem;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -5px; top: 8px;
+      width: 11px; height: 11px;
+      border-radius: 50%;
+      background: var(--teal);
+      border: 2px solid var(--bg);
+      box-shadow: 0 0 0 2px var(--teal-mid);
+    }
+
+    .timeline-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 0.4rem;
+      flex-wrap: wrap;
+    }
+
+    .timeline-company {
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--dark);
+    }
+
+    .timeline-location {
+      font-size: 0.8rem;
+      color: var(--soft);
+      font-weight: 400;
+    }
+
+    .timeline-badge {
+      background: var(--teal-light);
+      color: var(--teal);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 100px;
+      letter-spacing: 0.04em;
+    }
+
+    .timeline-role {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--teal);
+      margin-bottom: 0.3rem;
+    }
+
+    .timeline-dates {
+      font-size: 0.8rem;
+      color: var(--soft);
+      margin-bottom: 0.9rem;
+    }
+
+    .timeline-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    .timeline-bullets li {
+      font-size: 0.9rem;
+      color: var(--mid);
+      font-weight: 300;
+      padding-left: 1.1rem;
+      position: relative;
+      line-height: 1.6;
+    }
+
+    .timeline-bullets li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--teal-mid);
+      font-weight: 400;
+    }
+
+    /* ── SKILLS ── */
+    #skills { background: var(--white); }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .skill-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+
+    .skill-card:hover {
+      border-color: var(--teal-mid);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(26,122,110,0.07);
+    }
+
+    .skill-card-icon {
+      width: 40px; height: 40px;
+      background: var(--teal-light);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+
+    .skill-card h4 {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--dark);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 0.7rem;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .skill-tag {
+      background: var(--white);
+      border: 1px solid var(--border);
+      color: var(--mid);
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 3px 10px;
+      border-radius: 100px;
+    }
+
+    /* ── SAI PROJECT ── */
+    #sai { background: var(--bg); }
+
+    .sai-card {
+      margin-top: 3rem;
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .sai-card-header {
+      background: var(--teal);
+      padding: 2.5rem 3rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sai-card-header::after {
+      content: 'SAI';
+      position: absolute;
+      right: 2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: 'DM Serif Display', serif;
+      font-size: 8rem;
+      color: rgba(255,255,255,0.07);
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .sai-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      color: white;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 100px;
+      margin-bottom: 1rem;
+    }
+
+    .sai-card-header h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2.2rem;
+      color: white;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+
+    .sai-card-header p {
+      color: rgba(255,255,255,0.75);
+      font-size: 0.95rem;
+      font-weight: 300;
+      max-width: 500px;
+    }
+
+    .sai-card-body {
+      padding: 2.5rem 3rem;
+    }
+
+    .sai-features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+      margin-bottom: 2rem;
+    }
+
+    .sai-feature {
+      display: flex;
+      gap: 0.9rem;
+      align-items: flex-start;
+    }
+
+    .sai-feature-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--teal);
+      margin-top: 6px;
+      flex-shrink: 0;
+    }
+
+    .sai-feature p {
+      font-size: 0.9rem;
+      color: var(--mid);
+      font-weight: 300;
+      line-height: 1.5;
+    }
+
+    .sai-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .stack-tag {
+      background: var(--teal-light);
+      color: var(--teal);
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 5px 12px;
+      border-radius: 100px;
+    }
+
+    .sai-links {
+      display: flex;
+      gap: 1rem;
+    }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--white); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+      margin-top: 3rem;
+    }
+
+    .contact-text p {
+      font-size: 1rem;
+      color: var(--mid);
+      font-weight: 300;
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+      padding: 1rem 1.2rem;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      transition: border-color 0.2s, transform 0.15s;
+      color: var(--dark);
+    }
+
+    .contact-link:hover { border-color: var(--teal); transform: translateX(4px); }
+
+    .contact-link-icon {
+      width: 36px; height: 36px;
+      background: var(--teal-light);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .contact-link-icon svg { width: 18px; height: 18px; fill: var(--teal); }
+
+    .contact-link-label {
+      font-size: 0.75rem;
+      color: var(--soft);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .contact-link-value {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--dark);
+    }
+
+    .contact-info-block {
+      background: var(--bg);
+      border-radius: 16px;
+      padding: 2rem;
+      border: 1px solid var(--border);
+    }
+
+    .contact-info-block h4 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.4rem;
+      color: var(--dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-info-block p {
+      font-size: 0.9rem;
+      color: var(--soft);
+      font-weight: 300;
+      margin-bottom: 1.5rem;
+    }
+
+    .availability {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--teal);
+    }
+
+    .availability::before {
+      content: '';
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--teal);
+      animation: pulse 2s infinite;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 5vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    footer p {
+      font-size: 0.8rem;
+      color: var(--soft);
+    }
+
+    footer a { color: var(--teal); text-decoration: none; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(1.3); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .sai-features { grid-template-columns: 1fr; }
+      .hero-stats { gap: 2rem; }
+      .nav-links { display: none; }
+      .sai-card-header { padding: 2rem; }
+      .sai-card-body { padding: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">YE.</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#sai">SAI Project</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-tag">Lead Android Engineer · Remote</div>
+      <h1>Yokesh<br><span>Elumalai.</span></h1>
+      <p class="hero-sub">13+ years building large-scale Android applications for banking and fintech. Currently leading Android engineering at Boubyan Bank, Kuwait — and building open-source AI tools on the side.</p>
+      <div class="hero-actions">
+        <a href="#sai" class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          View SAI Project
+        </a>
+        <a href="#contact" class="btn-outline">
+          Get in Touch →
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="stat-num">13+</div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+        <div>
+          <div class="stat-num">40%</div>
+          <div class="stat-label">Build Time Reduced</div>
+        </div>
+        <div>
+          <div class="stat-num">10+</div>
+          <div class="stat-label">Apps Shipped</div>
+        </div>
+        <div>
+          <div class="stat-num">1</div>
+          <div class="stat-label">Open Source Project</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-inner">
+      <div class="section-label">About Me</div>
+      <h2 class="section-title">Engineer. Builder.<br><span>Problem Solver.</span></h2>
+      <div class="about-grid">
+        <div class="about-text reveal">
+          <p>From the moment I joined a bank as an Android Developer, one thing always bothered me — <strong>transactions are everywhere, but finding the right one feels like detective work.</strong></p>
+          <p>That frustration, lived from the inside of a banking app team, stayed with me through 13+ years of mobile engineering — and eventually led me to build SAI, an open-source intelligent transaction search engine.</p>
+          <p>Today I serve as <strong>Lead Engineer – Android at Boubyan Bank, Kuwait</strong>, one of the region's leading digital banking platforms, where I lead a full app revamp to MVI architecture with Jetpack Compose and a modular multi-module design system.</p>
+          <p>I believe great software is built collaboratively — through clear communication with product, design, security, and DevOps teams. My role is as much about people as it is about code.</p>
+        </div>
+        <div class="about-highlights reveal">
+          <div class="highlight-card">
+            <h4>Current Role</h4>
+            <p>Lead Engineer – Android at Boubyan Bank, Kuwait. Promoted from Senior Android Developer after 6 years of consistent high-impact delivery.</p>
+          </div>
+          <div class="highlight-card">
+            <h4>Open Source</h4>
+            <p>Built SAI (Search AI) — an intelligent transaction search engine powered by semantic vector search and natural language queries.</p>
+          </div>
+          <div class="highlight-card">
+            <h4>Specialisation</h4>
+            <p>Mobile banking architecture, Design Systems, multi-module Android apps, third-party payment integrations (Google Pay, Fitbit Pay, Garmin Pay).</p>
+          </div>
+          <div class="highlight-card">
+            <h4>Expanding Into</h4>
+            <p>AI-powered tooling — Python, FastAPI, Milvus vector database, Docker, and semantic search infrastructure.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="section-inner">
+      <div class="section-label">Work Experience</div>
+      <h2 class="section-title">Where I've <span>Built Things.</span></h2>
+      <div class="timeline">
+
+        <div class="timeline-item reveal">
+          <div class="timeline-meta">
+            <span class="timeline-company">Boubyan Bank</span>
+            <span class="timeline-location">Kuwait</span>
+            <span class="timeline-badge">Current</span>
+          </div>
+          <div class="timeline-role">Lead Engineer – Android</div>
+          <div class="timeline-dates">Aug 2018 – Present &nbsp;·&nbsp; Promoted to Lead, Mar 2024</div>
+          <ul class="timeline-bullets">
+            <li>Joined as Senior Android Developer (Aug 2018) and promoted to Lead Android Engineer (Mar 2024) for exceptional
+release management and on-time delivery</li>
+<li>Led full app revamp to MVI architecture with Jetpack Compose and Kotlin Coroutines/Flow, significantly reducing UI
+development time and improving maintainability, and cutting build times by over 40%</li>
+            <li>Built and maintained a shared Design System library of reusable Jetpack Compose components in collaboration with
+Design and Product teams, ensuring consistency across all squads</li>
+            <li>Published Design System library to Artifactory with the DevOps team, enabling seamless adoption across 6 independent
+product squads</li>
+            <li>Worked with Samsung on In-App Card Provisioning for Mastercard and Visa, and with AION Digital for OCR service
+integration</li>
+            <li>Collaborated with Security team to implement SSL pinning, secure API headers, and JWT token management</li>
+            <li>Review designs and user journeys with Product Managers and UX/UI specialists, and communicate directly with
+stakeholders on new features and strategic changes</li>
+            <li><a href="https://play.google.com/store/apps/details?id=com.boubyanapp.boubyan.bank" target="_blank" style="color: var(--teal); font-weight: 600; text-decoration: none;">View App →</a></li>
+          </ul>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="timeline-meta">
+            <span class="timeline-company">FoodHub</span>
+            <span class="timeline-location">Chennai</span>
+          </div>
+          <div class="timeline-role">Senior Software Engineer – Android</div>
+          <div class="timeline-dates">Sep 2016 – Jul 2018</div>
+          <ul class="timeline-bullets">
+            <li>Developed a shared AAR ordering library used across customer and FoodHub apps, with theme customization at the app level</li>
+            <li>Created multiple customer-facing Android applications using Python automation from a single source codebase, ensuring consistent performance across all variants</li>
+            <li>Partnered with cross-functional and backend teams to define feature roadmaps and establish well-designed API contracts</li>
+            <li><a href="https://play.google.com/store/apps/details?id=com.t2s.foodhub" target="_blank" style="color: var(--teal); font-weight: 600; text-decoration: none;">View App →</a></li>
+          </ul>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="timeline-meta">
+            <span class="timeline-company">The Laundry Project</span>
+            <span class="timeline-location">Chennai</span>
+          </div>
+          <div class="timeline-role">Senior Product Specialist – Mobile</div>
+          <div class="timeline-dates">Dec 2015 – Sep 2016</div>
+          <ul class="timeline-bullets">
+            <li>Developed mobile app and backend APIs for Wassup on Demand; built E-POS system across India</li>
+          </ul>
+        </div>
+
+        <div class="timeline-item reveal">
+          <div class="timeline-meta">
+            <span class="timeline-company">Dexel Designs Pty Ltd</span>
+            <span class="timeline-location">Melbourne</span>
+          </div>
+          <div class="timeline-role">Project Lead – Mobile & Web</div>
+          <div class="timeline-dates">Dec 2013 – Dec 2015 &nbsp;·&nbsp; Promoted within 6 months</div>
+          <ul class="timeline-bullets">
+            <li>Promoted from Mobile Engineer to Project Lead; delivered multiple Laravel web apps and managed vendors</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-inner">
+      <div class="section-label">Technical Skills</div>
+      <h2 class="section-title">Tools of the <span>Trade.</span></h2>
+      <div class="skills-grid">
+        <div class="skill-card reveal">
+          <div class="skill-card-icon">📱</div>
+          <h4>Android</h4>
+          <div class="skill-tags">
+            <span class="skill-tag">Kotlin</span>
+            <span class="skill-tag">Jetpack Compose</span>
+            <span class="skill-tag">MVI</span>
+            <span class="skill-tag">MVVM</span>
+            <span class="skill-tag">Coroutines</span>
+            <span class="skill-tag">Flow</span>
+            <span class="skill-tag">Dagger/Hilt</span>
+            <span class="skill-tag">Retrofit</span>
+            <span class="skill-tag">Room</span>
+            <span class="skill-tag">RxKotlin</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <div class="skill-card-icon">🏗️</div>
+          <h4>Architecture</h4>
+          <div class="skill-tags">
+            <span class="skill-tag">Clean Architecture</span>
+            <span class="skill-tag">Multi-Module</span>
+            <span class="skill-tag">Design Systems</span>
+            <span class="skill-tag">Modularization</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <div class="skill-card-icon">💳</div>
+          <h4>Payments & Integrations</h4>
+          <div class="skill-tags">
+            <span class="skill-tag">Google Pay</span>
+            <span class="skill-tag">Fitbit Pay</span>
+            <span class="skill-tag">Garmin Pay</span>
+            <span class="skill-tag">Samsung (Visa/MC)</span>
+            <span class="skill-tag">OCR (AION Digital)</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <div class="skill-card-icon">🤖</div>
+          <h4>AI / Backend</h4>
+          <div class="skill-tags">
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">FastAPI</span>
+            <span class="skill-tag">Milvus</span>
+            <span class="skill-tag">SentenceTransformers</span>
+            <span class="skill-tag">Docker</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <div class="skill-card-icon">🔒</div>
+          <h4>Security</h4>
+          <div class="skill-tags">
+            <span class="skill-tag">SSL Pinning</span>
+            <span class="skill-tag">JWT</span>
+            <span class="skill-tag">Secure API Headers</span>
+            <span class="skill-tag">Biometric Auth</span>
+          </div>
+        </div>
+        <div class="skill-card reveal">
+          <div class="skill-card-icon">⚙️</div>
+          <h4>CI/CD & Tools</h4>
+          <div class="skill-tags">
+            <span class="skill-tag">Jenkins</span>
+            <span class="skill-tag">GitHub Actions</span>
+            <span class="skill-tag">Artifactory</span>
+            <span class="skill-tag">Git</span>
+            <span class="skill-tag">Jira</span>
+            <span class="skill-tag">Figma</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SAI PROJECT -->
+  <section id="sai">
+    <div class="section-inner">
+      <div class="section-label">Open Source / Side Projects</div>
+      <h2 class="section-title">Building the Future of <span>Financial Search.</span></h2>
+      <div class="sai-card reveal">
+        <div class="sai-card-header">
+          <div class="sai-badge">Open Source</div>
+          <h3>SAI — Search AI</h3>
+          <p>An intelligent transaction search engine that lets you find transactions using natural language — no filters, no dropdowns, just ask.</p>
+        </div>
+        <div class="sai-card-body">
+          <div class="sai-features">
+            <div class="sai-feature">
+              <div class="sai-feature-dot"></div>
+              <p><strong>Semantic Search</strong> — powered by Milvus vector database and 384-dim sentence embeddings</p>
+            </div>
+            <div class="sai-feature">
+              <div class="sai-feature-dot"></div>
+              <p><strong>Temporal Intelligence</strong> — understands "last week", "last 30 days", "January 2024" automatically</p>
+            </div>
+            <div class="sai-feature">
+              <div class="sai-feature-dot"></div>
+              <p><strong>Natural Language Queries</strong> — "How much did I spend on groceries last month?"</p>
+            </div>
+            <div class="sai-feature">
+              <div class="sai-feature-dot"></div>
+              <p><strong>Multi-Tenant Architecture</strong> — API key-based isolated collections by design</p>
+            </div>
+            <div class="sai-feature">
+              <div class="sai-feature-dot"></div>
+              <p><strong>Rich Analytics</strong> — spending summaries, top merchants, category breakdowns</p>
+            </div>
+            <div class="sai-feature">
+              <div class="sai-feature-dot"></div>
+              <p><strong>Under 200ms</strong> — median query latency, production-grade performance</p>
+            </div>
+          </div>
+          <div class="sai-stack">
+            <span class="stack-tag">FastAPI</span>
+            <span class="stack-tag">Python</span>
+            <span class="stack-tag">Milvus</span>
+            <span class="stack-tag">all-MiniLM-L6-v2</span>
+            <span class="stack-tag">SentenceTransformers</span>
+            <span class="stack-tag">Docker Compose</span>
+            <span class="stack-tag">Chart.js</span>
+          </div>
+          <div class="sai-links">
+            <a href="https://yokeshezumalai.github.io/sai-search-ai" target="_blank" class="btn-primary">View Product Site →</a>
+            <a href="https://github.com/yokeshezumalai/SAI-SearchAI" target="_blank" class="btn-outline">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+              GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-inner">
+      <div class="section-label">Contact</div>
+      <h2 class="section-title">Let's <span>Connect.</span></h2>
+      <div class="contact-grid">
+        <div class="contact-text reveal">
+          <p>Whether you're building a fintech product, looking for an experienced Android engineer, or want to collaborate on open-source — I'd love to hear from you.</p>
+          <div class="contact-links">
+            <a href="mailto:yokesh.1690@gmail.com" class="contact-link">
+              <div class="contact-link-icon">
+                <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+              </div>
+              <div>
+                <div class="contact-link-label">Email</div>
+                <div class="contact-link-value">yokesh.1690@gmail.com</div>
+              </div>
+            </a>
+            <a href="https://linkedin.com/in/yokesh-elumalai" target="_blank" class="contact-link">
+              <div class="contact-link-icon">
+                <svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h14m-.5 15.5v-5.3a3.26 3.26 0 00-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 011.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 001.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 00-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+              </div>
+              <div>
+                <div class="contact-link-label">LinkedIn</div>
+                <div class="contact-link-value">linkedin.com/in/yokesh-elumalai</div>
+              </div>
+            </a>
+            <a href="https://github.com/yokeshezumalai" target="_blank" class="contact-link">
+              <div class="contact-link-icon">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+              </div>
+              <div>
+                <div class="contact-link-label">GitHub</div>
+                <div class="contact-link-value">github.com/yokeshezumalai</div>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="contact-info-block reveal">
+          <h4>Open to Opportunities</h4>
+          <p>Staff / Lead Android Engineer roles in fintech, banking, and AI-adjacent products.</p>
+          <div class="availability">Available for new opportunities</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 Yokesh Elumalai. Built with care.</p>
+    <p>
+      <a href="https://yokeshezumalai.github.io/sai-search-ai" target="_blank">SAI Project</a> &nbsp;·&nbsp;
+      <a href="https://github.com/yokeshezumalai" target="_blank">GitHub</a> &nbsp;·&nbsp;
+      <a href="https://linkedin.com/in/yokesh-elumalai" target="_blank">LinkedIn</a>
+    </p>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    reveals.forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
